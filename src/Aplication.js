@@ -83,18 +83,44 @@ class Web3API {
     handleCalculate();
   }
 
-  getCount(contract, setUsageCount, setCount) {
+  getCount(contract, setUsageCount, setCount, web3) {
     if (contract) {
       const fetchUsageCount = async () => {
         try {
+          web3.eth.net.getId().then(networkId => {
+            if (networkId !== this.chainId) {
+              window.ethereum
+                .request({
+                  method: 'wallet_addEthereumChain',
+                  params: [
+                    {
+                      chainId: Web3.utils.toHex('11155111'),
+                      chainName: 'Sepolia',
+                      nativeCurrency: {
+                        name: 'ETH',
+                        symbol: 'ETH',
+                        decimals: 18,
+                      },
+                      rpcUrls: ['https://rpc.sepolia.org'],
+                      blockExplorerUrls: ['https://sepolia.etherscan.io'],
+                    },
+                  ],
+                })
+                .then(() => Notify.infoMessageNotify('network added'));
+            }
+          });
+
           if (window.ethereum.networkVersion !== this.chainId) {
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: Web3.utils.toHex(this.hainId) }],
             });
           }
+
           const count = await contract.methods['usageCount']().call();
+
           setUsageCount(count);
+
           setCount(false);
         } catch (error) {
           console.error('Error fetching usage count:', error);

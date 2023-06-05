@@ -10,12 +10,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: linear-gradient(
-    180deg,
-    rgba(252, 255, 244, 1) 13.75%,
-    rgba(223, 229, 215, 1) 45.5%,
-    rgba(179, 190, 173, 1) 100%
-  ); */
 }
 
 #root {
