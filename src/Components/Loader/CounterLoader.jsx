@@ -1,20 +1,20 @@
 import { ThreeDots } from 'react-loader-spinner';
-import { LoaderCalc } from './Loader.styled';
+import { CountLoader } from './Loader.styled';
 
 function CounterLoader() {
   return (
-    <LoaderCalc>
+    <CountLoader>
       <ThreeDots
-        height="80"
-        width="80"
-        radius="9"
+        height="40"
+        width="40"
+        radius="4"
         color="#4fa94d"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
         wrapperClassName=""
         visible={true}
       />
-    </LoaderCalc>
+    </CountLoader>
   );
 }
 
