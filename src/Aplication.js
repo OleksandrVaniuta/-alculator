@@ -88,25 +88,25 @@ class Web3API {
       const fetchUsageCount = async () => {
         try {
           web3.eth.net.getId().then(networkId => {
-            if (networkId !== this.chainId) {
-              window.ethereum
-                .request({
-                  method: 'wallet_addEthereumChain',
-                  params: [
-                    {
-                      chainId: Web3.utils.toHex('11155111'),
-                      chainName: 'Sepolia',
-                      nativeCurrency: {
-                        name: 'ETH',
-                        symbol: 'ETH',
-                        decimals: 18,
-                      },
-                      rpcUrls: ['https://rpc.sepolia.org'],
-                      blockExplorerUrls: ['https://sepolia.etherscan.io'],
+            console.log(networkId);
+            if (!networkId === this.chainId) {
+              window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: Web3.utils.toHex('11155111'),
+                    chainName: 'Sepolia',
+                    nativeCurrency: {
+                      name: 'ETH',
+                      symbol: 'ETH',
+                      decimals: 18,
                     },
-                  ],
-                })
-                .then(() => Notify.infoMessageNotify('network added'));
+                    rpcUrls: ['https://rpc.sepolia.org'],
+                    blockExplorerUrls: ['https://sepolia.etherscan.io'],
+                  },
+                ],
+              });
+              Notify.infoMessageNotify('network added');
             }
           });
 
