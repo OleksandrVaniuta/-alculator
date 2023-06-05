@@ -89,7 +89,7 @@ class Web3API {
         try {
           web3.eth.net.getId().then(networkId => {
             console.log(networkId);
-            if (!networkId === this.chainId) {
+            if (networkId !== this.chainId) {
               window.ethereum.request({
                 method: 'wallet_addEthereumChain',
                 params: [
