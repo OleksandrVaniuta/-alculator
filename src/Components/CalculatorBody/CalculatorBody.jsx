@@ -40,7 +40,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
   }, [web3]);
 
   useEffect(() => {
-    Web3Connect.getCount(contract, setUsageCount, setCount);
+    Web3Connect.getCount(contract, setUsageCount, setCount, web3);
   }, [contract, result]);
 
   const handleCalculate = async () => {

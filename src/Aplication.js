@@ -20,7 +20,6 @@ class Web3API {
   }
 
   loadWalletAdress(web3, setAccounts, setCount) {
-    this.getNetwork(web3, setCount);
     const loadAccounts = async () => {
       if (web3 && typeof web3.eth !== 'undefined') {
         try {
@@ -84,7 +83,8 @@ class Web3API {
     handleCalculate();
   }
 
-  getCount(contract, setUsageCount, setCount) {
+  getCount(contract, setUsageCount, setCount, web3) {
+    this.getNetwork(web3);
     if (contract && window.ethereum.networkVersion === this.chainId) {
       const fetchUsageCount = async () => {
         try {
@@ -103,7 +103,7 @@ class Web3API {
     }
   }
 
-  async getNetwork(web3, setCount) {
+  async getNetwork(web3) {
     if (window.ethereum.networkVersion !== this.chainId) {
       try {
         await window.ethereum.request({
@@ -128,7 +128,6 @@ class Web3API {
               },
             ],
           });
-          setCount(false);
           Notify.infoMessageNotify('network added');
         }
       }
