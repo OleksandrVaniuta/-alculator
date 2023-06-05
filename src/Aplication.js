@@ -94,7 +94,7 @@ class Web3API {
                 method: 'wallet_addEthereumChain',
                 params: [
                   {
-                    chainId: Web3.utils.toHex('11155111'),
+                    chainId: web3.utils.toHex(this.chainId),
                     chainName: 'Sepolia',
                     nativeCurrency: {
                       name: 'ETH',
@@ -113,7 +113,7 @@ class Web3API {
           if (window.ethereum.networkVersion !== this.chainId) {
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: Web3.utils.toHex(this.hainId) }],
+              params: [{ chainId: web3.utils.toHex(this.hainId) }],
             });
           }
 
