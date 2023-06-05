@@ -14,14 +14,13 @@ function App() {
       window.ethereum.on('accountsChanged', function (accounts) {
         if (accounts.length === 0) {
           setAccounts('');
-          Notify.infoMessageNotify('Disabled from metamask');
+          Notify.infoMessageNotify('Disabled from MetaMask');
         }
       });
       return;
     }
     if (!window.ethereum) {
-      console.log('instal metamask');
-      Notify.errorMessageNotify('Metamask is not installed');
+      Notify.errorMessageNotify('MetaMask is not installed');
       return;
     }
   }, []);
