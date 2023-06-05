@@ -84,8 +84,8 @@ class Web3API {
     handleCalculate();
   }
 
-  getCount(contract, setUsageCount, setCount, web3) {
-    if (contract) {
+  getCount(contract, setUsageCount, setCount) {
+    if (contract && window.ethereum.networkVersion === this.chainId) {
       const fetchUsageCount = async () => {
         try {
           const count = await contract.methods['usageCount']().call();
@@ -128,6 +128,7 @@ class Web3API {
               },
             ],
           });
+
           Notify.infoMessageNotify('network added');
         }
       }
