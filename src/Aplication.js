@@ -87,34 +87,33 @@ class Web3API {
     if (contract) {
       const fetchUsageCount = async () => {
         try {
-          web3.eth.net.getId().then(networkId => {
-            console.log(networkId);
-            if (networkId != this.chainId) {
-              window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [
-                  {
-                    chainId: web3.utils.toHex(this.chainId),
-                    chainName: 'Sepolia',
-                    nativeCurrency: {
-                      name: 'ETH',
-                      symbol: 'ETH',
-                      decimals: 18,
-                    },
-                    rpcUrls: ['https://rpc.sepolia.org'],
-                    blockExplorerUrls: ['https://sepolia.etherscan.io'],
-                  },
-                ],
-              });
-              Notify.infoMessageNotify('network added');
-            }
-          });
-
           if (window.ethereum.networkVersion !== this.chainId) {
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: web3.utils.toHex(this.chainId) }],
-            });
+            try {
+              await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: web3.utils.toHex(this.chainId) }],
+              });
+            } catch (error) {
+              if (error.code === 4902) {
+                window.ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [
+                    {
+                      chainId: web3.utils.toHex(this.chainId),
+                      chainName: 'Sepolia',
+                      nativeCurrency: {
+                        name: 'ETH',
+                        symbol: 'ETH',
+                        decimals: 18,
+                      },
+                      rpcUrls: ['https://rpc.sepolia.org'],
+                      blockExplorerUrls: ['https://sepolia.etherscan.io'],
+                    },
+                  ],
+                });
+                Notify.infoMessageNotify('network added');
+              }
+            }
           }
 
           const count = await contract.methods['usageCount']().call();
