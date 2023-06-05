@@ -95,7 +95,7 @@ class Web3API {
               });
             } catch (error) {
               if (error.code === 4902) {
-                window.ethereum.request({
+                await window.ethereum.request({
                   method: 'wallet_addEthereumChain',
                   params: [
                     {
