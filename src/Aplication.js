@@ -4,6 +4,7 @@ import Notify from './Notifycation';
 class Web3API {
   constructor() {
     this.ContactAdress = '0x1851ffBce02A134eFd9ddBC91920b0c6DCEfB6f5';
+    this.chainId = '11155111';
   }
 
   initializationWeb3(setWeb3) {
@@ -18,13 +19,14 @@ class Web3API {
     enableWeb3();
   }
 
-  loadWalletAdress(web3, setAccounts) {
+  loadWalletAdress(web3, setAccounts, setCount) {
     const loadAccounts = async () => {
       if (web3 && typeof web3.eth !== 'undefined') {
         try {
           const accounts = await web3.eth.getAccounts();
           setAccounts(accounts);
           Notify.successMessageNotify('connected to wallet');
+          setCount(true);
         } catch (error) {
           Notify.errorMessageNotify('Unable to access account');
         }
@@ -81,14 +83,22 @@ class Web3API {
     handleCalculate();
   }
 
-  getCount(contract, setUsageCount) {
+  getCount(contract, setUsageCount, setCount) {
     if (contract) {
       const fetchUsageCount = async () => {
         try {
+          if (window.ethereum.networkVersion !== this.chainId) {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: Web3.utils.toHex(this.hainId) }],
+            });
+          }
           const count = await contract.methods['usageCount']().call();
           setUsageCount(count);
+          setCount(false);
         } catch (error) {
           console.error('Error fetching usage count:', error);
+          setCount(false);
         }
       };
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Web3API from '../../Aplication';
 import ContractABI from '../../Contract/abi.json';
 import Loader from '../Loader/Loader';
+import CounterLoader from '../Loader/CounterLoader';
 import {
   Section,
   Main,
@@ -27,9 +28,10 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
   const [calculating, setCalculating] = useState(false);
   const [contract, setContract] = useState(null);
   const [usageCount, setUsageCount] = useState(15);
+  const [count, setCount] = useState(false);
 
   useEffect(() => {
-    Web3Connect.loadWalletAdress(web3, setAccounts);
+    Web3Connect.loadWalletAdress(web3, setAccounts, setCount);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [web3]);
 
@@ -38,7 +40,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
   }, [web3]);
 
   useEffect(() => {
-    Web3Connect.getCount(contract, setUsageCount);
+    Web3Connect.getCount(contract, setUsageCount, setCount);
   }, [contract, result]);
 
   const handleCalculate = async () => {
@@ -103,7 +105,8 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
         <SectionItem>
           <ItemTitle>Result</ItemTitle>
           <ResultBox>{result}</ResultBox>
-          {accounts.length > 0 && (
+          {count && <CounterLoader />}
+          {accounts.length > 0 && !count && (
             <CalcUsage>Calculator used: {usageCount} times</CalcUsage>
           )}
         </SectionItem>

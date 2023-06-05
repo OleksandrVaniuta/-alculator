@@ -21,7 +21,7 @@ function App() {
     }
     if (!window.ethereum) {
       console.log('instal metamask');
-      Notify.errorMessageNotify('Metamask is not instaled');
+      Notify.errorMessageNotify('Metamask is not installed');
       return;
     }
   }, []);
