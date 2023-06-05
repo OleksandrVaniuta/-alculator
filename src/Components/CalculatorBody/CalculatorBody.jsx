@@ -27,7 +27,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
   const [opetatioType, setOperationType] = useState('add');
   const [calculating, setCalculating] = useState(false);
   const [contract, setContract] = useState(null);
-  const [usageCount, setUsageCount] = useState(15);
+  const [usageCount, setUsageCount] = useState(0);
   const [count, setCount] = useState(false);
 
   useEffect(() => {
