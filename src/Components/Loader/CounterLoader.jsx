@@ -8,7 +8,7 @@ function CounterLoader() {
         height="40"
         width="40"
         radius="4"
-        color="#4fa94d"
+        color=" #433dc4"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
         wrapperClassName=""

@@ -5,8 +5,8 @@ function Loader() {
   return (
     <LoaderCalc>
       <BallTriangle
-        height={100}
-        width={100}
+        height={80}
+        width={80}
         radius={5}
         color="#433dc4"
         ariaLabel="ball-triangle-loading"

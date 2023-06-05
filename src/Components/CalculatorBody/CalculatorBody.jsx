@@ -75,7 +75,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
         <InputContainer>
           <ItemTitle>Values</ItemTitle>
           <Label>
-            Value A:
+            a:
             <Input
               type="number"
               name="Value A"
@@ -83,7 +83,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
             />
           </Label>
           <Label>
-            Value B:
+            b:
             <Input
               type="number"
               name="Value B"

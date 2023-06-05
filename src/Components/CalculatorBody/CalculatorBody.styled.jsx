@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 
 export const Main = styled.main`
+  padding-top: 20px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+  height: 80vh;
 
   @media screen and (min-width: 768px) {
     width: calc(100%-40px);
@@ -13,16 +15,25 @@ export const Main = styled.main`
 `;
 
 export const Section = styled.section`
-  width: 100%;
+  position: relative;
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background-color: #fff;
+  padding-top: 10px;
 
   @media screen and (min-width: 480px) {
     width: 480px;
     marging: 0 auto;
   }
   @media screen and (min-width: 768px) {
+    height: 240px;
     display: flex;
     width: 100%;
     justify-content: space-around;
+    padding-top: 20px;
   }
 `;
 
@@ -33,6 +44,8 @@ export const SectionItem = styled.div`
 `;
 
 export const ItemTitle = styled.h3`
+  margin: 0;
+  margin-bottom: 20px;
   color: #a9a9a9;
   @media screen and (min-width: 768px) {
     font-size: 16px;
@@ -93,11 +106,12 @@ export const Option = styled.option`
 
 export const Label = styled.label`
   font-weight: 700;
-  border: 1px solid black;
   border-radius: 3px;
-  border-color: #433dc4;
+  border: none;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding-left: 2px;
   color: #433dc4;
-  background-color: #faf0e6;
+  background-color: #f2f2f0;
   margin: 0 auto;
   margin-bottom: 10px;
 
@@ -106,14 +120,14 @@ export const Label = styled.label`
   }
   @media screen and (min-width: 1280px) {
     font-size: 24px;
-    width: 400px;
+    width: 320px;
   }
 `;
 
 export const Input = styled.input`
   outline: none;
   border: none;
-  background-color: #faf0e6;
+  background-color: #f2f2f0;
   color: #433dc4;
 
   &::-webkit-outer-spin-button,
@@ -132,26 +146,33 @@ export const Input = styled.input`
 `;
 
 export const CalcBtn = styled.button`
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #433dc4;
   color: #fff;
   margin: 0 auto;
-  border-radius: 3px;
+  border-radius: 10px;
   border: none;
   transition: box-shadow 300ms linear;
   transition: background-color 1000ms linear;
   cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.3);
 
   @media screen and (min-width: 768px) {
+    position: static;
     font-size: 24px;
     width: 120px;
     margin-top: 50px;
+    transform: none;
   }
 
   &:hover {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.9);
   }
   &:disabled {
-    opacity: 0.5;
     background-color: #808080;
     cursor: not-allowed;
   }
@@ -160,9 +181,10 @@ export const CalcBtn = styled.button`
 export const ResultBox = styled.p`
   border: 1px solid;
   border-radius: 3px;
-  border-color: #433dc4;
+  border: none;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
   color: #433dc4;
-  background-color: #faf0e6;
+  background-color: #f2f2f0;
   height: 17px;
   width: 50%;
 
@@ -172,8 +194,14 @@ export const ResultBox = styled.p`
   margin: 0 auto;
   margin-bottom: 10px;
 
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    height: 20px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
   @media screen and (min-width: 1280px) {
-    width: auto;
+    width: 80%;
     height: 31px;
     font-size: 24px;
   }
