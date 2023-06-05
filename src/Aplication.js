@@ -20,6 +20,7 @@ class Web3API {
   }
 
   loadWalletAdress(web3, setAccounts, setCount) {
+    this.getNetwork(web3);
     const loadAccounts = async () => {
       if (web3 && typeof web3.eth !== 'undefined') {
         try {
@@ -46,7 +47,7 @@ class Web3API {
           contract.transactionConfirmationBlocks = 1;
           setContract(contract);
         } catch (error) {
-          console.error('Не удалось получить доступ к контракту:', error);
+          console.error('Failed to access contract:', error);
         }
       }
     };
@@ -87,35 +88,6 @@ class Web3API {
     if (contract) {
       const fetchUsageCount = async () => {
         try {
-          if (window.ethereum.networkVersion !== this.chainId) {
-            try {
-              await window.ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: web3.utils.toHex(this.chainId) }],
-              });
-            } catch (error) {
-              if (error.code === 4902) {
-                await window.ethereum.request({
-                  method: 'wallet_addEthereumChain',
-                  params: [
-                    {
-                      chainId: web3.utils.toHex(this.chainId),
-                      chainName: 'Sepolia',
-                      nativeCurrency: {
-                        name: 'ETH',
-                        symbol: 'ETH',
-                        decimals: 18,
-                      },
-                      rpcUrls: ['https://rpc.sepolia.org'],
-                      blockExplorerUrls: ['https://sepolia.etherscan.io'],
-                    },
-                  ],
-                });
-                Notify.infoMessageNotify('network added');
-              }
-            }
-          }
-
           const count = await contract.methods['usageCount']().call();
 
           setUsageCount(count);
@@ -128,6 +100,37 @@ class Web3API {
       };
 
       fetchUsageCount();
+    }
+  }
+
+  async getNetwork(web3) {
+    if (window.ethereum.networkVersion !== this.chainId) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: web3.utils.toHex(this.chainId) }],
+        });
+      } catch (error) {
+        if (error.code === 4902) {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: web3.utils.toHex(this.chainId),
+                chainName: 'Sepolia',
+                nativeCurrency: {
+                  name: 'ETH',
+                  symbol: 'ETH',
+                  decimals: 18,
+                },
+                rpcUrls: ['https://rpc.sepolia.org'],
+                blockExplorerUrls: ['https://sepolia.etherscan.io'],
+              },
+            ],
+          });
+          Notify.infoMessageNotify('network added');
+        }
+      }
     }
   }
 }

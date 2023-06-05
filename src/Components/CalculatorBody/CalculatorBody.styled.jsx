@@ -79,10 +79,11 @@ export const Select = styled.select`
   background-color: #433dc4;
   border: none;
   outline: none;
-  border-radius: 3px;
+  border-radius: 5px;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
+    padding-right: 10px;
   }
   @media screen and (min-width: 1280px) {
     font-size: 24px;
