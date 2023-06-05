@@ -113,7 +113,7 @@ class Web3API {
           if (window.ethereum.networkVersion !== this.chainId) {
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: web3.utils.toHex(this.hainId) }],
+              params: [{ chainId: web3.utils.toHex(this.chainId) }],
             });
           }
 
