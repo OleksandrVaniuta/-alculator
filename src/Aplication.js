@@ -84,10 +84,10 @@ class Web3API {
   }
 
   getCount(contract, setUsageCount, setCount, web3) {
-    this.getNetwork(web3);
     if (contract) {
       const fetchUsageCount = async () => {
         try {
+          this.getNetwork(web3);
           const count = await contract.methods['usageCount']().call();
 
           setUsageCount(count);
