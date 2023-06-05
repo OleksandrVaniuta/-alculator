@@ -66,7 +66,7 @@ function CalculatorBody({ web3, setAccounts, accounts }) {
               onChange={e => setOperationType(e.target.value)}
             >
               <Option value="add">add</Option>
-              <Option value="substract">substract</Option>
+              <Option value="subtract">subtract</Option>
               <Option value="divide">divide</Option>
               <Option value="multiply">multiply</Option>
             </Select>
