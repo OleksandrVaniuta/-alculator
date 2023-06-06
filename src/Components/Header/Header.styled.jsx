@@ -73,8 +73,8 @@ export const WalletBox = styled.div`
     border-radius: 30px;
 
     @media screen and (min-width: 1280px) {
-      padding-top: 9px;
-      padding-bottom: 9px;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
   }
 `;
