@@ -14,6 +14,7 @@ class Web3API {
         await window.ethereum.enable();
         this.web3dsa = initWeb3;
         setWeb3(initWeb3);
+        this.getNetwork(initWeb3);
       } catch (error) {}
     };
     enableWeb3();
@@ -83,11 +84,10 @@ class Web3API {
     handleCalculate();
   }
 
-  getCount(contract, setUsageCount, setCount, web3) {
-    if (contract) {
+  getCount(contract, setUsageCount, setCount, accounts) {
+    if (contract && accounts.length > 0) {
       const fetchUsageCount = async () => {
         try {
-          this.getNetwork(web3);
           const count = await contract.methods['usageCount']().call();
 
           setUsageCount(count);
